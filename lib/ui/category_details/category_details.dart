@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:news_app_c11_maadi/api/api_manager.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/news_list.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/source_tab.dart';
@@ -54,7 +55,10 @@ class _CategoryDetailsTabState extends State<CategoryDetailsTab> {
                     ),
                     tabs: sources.map((source) => SourceTabWidget(source: source,)).toList()
                 ),
-                NewsListWidget(sourceNames: sources,)
+                Expanded(
+                    child: TabBarView(
+                children: sources.map((source) => NewsListWidget(source: source,)).toList()),
+                )
               ],
             ),
           );
