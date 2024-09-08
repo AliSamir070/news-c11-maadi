@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_c11_maadi/api/api_manager.dart';
-import 'package:news_app_c11_maadi/ui/category_details/widgets/news_list.dart';
+import 'package:news_app_c11_maadi/ui/category_details/ViewModel/CategoryDetailsViewModel.dart';
+import 'package:news_app_c11_maadi/ui/category_details/widgets/NewsListWidget/news_list.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/source_tab.dart';
 
 import '../../model/SourcesResponse/Source.dart';
@@ -16,9 +18,71 @@ class CategoryDetailsTab extends StatefulWidget {
 }
 
 class _CategoryDetailsTabState extends State<CategoryDetailsTab> {
+  CategoriesViewModel viewModel = CategoriesViewModel();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    viewModel.loadSources(widget.categoryId);
+  }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return BlocProvider(
+        create: (context) =>viewModel ,
+        child: BlocBuilder<CategoriesViewModel,CategoriesStates>(
+            builder: (context, state) {
+              switch(state){
+
+                case CategoriesInitialState():{
+                  return Container();
+                }
+                case CategoriesLoadingState():
+                  {
+                    return Center(child: CircularProgressIndicator(),);
+                  }
+                case CategoriesErrorState():
+                  {
+                    return Column(
+                      children: [
+                        Text(state.error),
+                        ElevatedButton(onPressed: (){
+                          viewModel.loadSources(widget.categoryId);
+                        }, child: Text("Try Again"))
+                      ],
+                    );
+                  }
+                case CategoriesSuccessState():
+                  {
+                    return DefaultTabController(
+                      length: state.sources.length,
+                      child: Column(
+                        children: [
+                          TabBar(
+                              padding: EdgeInsets.all(16),
+                              tabAlignment: TabAlignment.start,
+                              labelColor: Colors.white,
+                              dividerHeight: 0,
+                              unselectedLabelColor: Theme.of(context).colorScheme.primary,
+                              isScrollable: true,
+                              indicator: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  border: Border.all(color: Theme.of(context).colorScheme.primary),
+                                  color: Theme.of(context).colorScheme.primary
+                              ),
+                              tabs: state.sources.map((source) => SourceTabWidget(source: source,)).toList()
+                          ),
+                          Expanded(
+                            child: TabBarView(
+                                children: state.sources.map((source) => NewsListWidget(source: source,)).toList()),
+                          )
+                        ],
+                      ),
+                    );
+                  }
+              }
+            },
+        ),
+    )/*FutureBuilder(
         future: ApiManager.getSources(widget.categoryId),
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
@@ -63,6 +127,6 @@ class _CategoryDetailsTabState extends State<CategoryDetailsTab> {
             ),
           );
         },
-    );
+    )*/;
   }
 }
