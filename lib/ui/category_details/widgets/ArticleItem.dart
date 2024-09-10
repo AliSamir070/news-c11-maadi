@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app_c11_maadi/model/NewsResponse/Articles.dart';
-import 'package:news_app_c11_maadi/model/article_model.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
+
+import '../../../data/model/NewsResponse/Articles.dart';
 
 class ArticleItem extends StatelessWidget {
   Article article;

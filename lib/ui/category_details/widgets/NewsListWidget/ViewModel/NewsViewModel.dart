@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_c11_maadi/api/api_manager.dart';
 
-import '../../../../../model/NewsResponse/Articles.dart';
+import '../../../../../data/api/api_manager.dart';
+import '../../../../../data/model/NewsResponse/Articles.dart';
 
 class NewsViewModel extends Cubit<NewsStates>{
   NewsViewModel():super(NewsInitialState());

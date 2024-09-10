@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_c11_maadi/api/api_manager.dart';
 import 'package:news_app_c11_maadi/ui/category_details/ViewModel/CategoryDetailsViewModel.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/NewsListWidget/news_list.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/source_tab.dart';
 
-import '../../model/SourcesResponse/Source.dart';
 
 class CategoryDetailsTab extends StatefulWidget {
   String categoryId;

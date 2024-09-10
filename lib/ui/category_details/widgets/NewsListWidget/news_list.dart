@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_c11_maadi/api/api_manager.dart';
-import 'package:news_app_c11_maadi/model/NewsResponse/Articles.dart';
-import 'package:news_app_c11_maadi/model/article_model.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/NewsListWidget/ViewModel/NewsViewModel.dart';
 
-import '../../../../model/SourcesResponse/Source.dart';
+import '../../../../data/model/SourcesResponse/Source.dart';
 import '../ArticleItem.dart';
 
 class NewsListWidget extends StatefulWidget {

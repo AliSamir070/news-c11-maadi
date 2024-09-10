@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app_c11_maadi/model/category_model.dart';
 import 'package:news_app_c11_maadi/ui/categories/widgets/category_item.dart';
+
+import '../../data/model/category_model.dart';
 
 class CategoriesTab extends StatelessWidget {
   void Function(String) onCategoryClick;

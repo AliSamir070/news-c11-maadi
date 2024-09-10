@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../api/api_manager.dart';
-import '../../../model/SourcesResponse/Source.dart';
+import '../../../data/api/api_manager.dart';
+import '../../../data/model/SourcesResponse/Source.dart';
 
 class CategoriesViewModel extends Cubit<CategoriesStates>{
   CategoriesViewModel():super(CategoriesInitialState());
