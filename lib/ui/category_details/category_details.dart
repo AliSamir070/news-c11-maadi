@@ -2,9 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app_c11_maadi/DI/di.dart';
+import 'package:news_app_c11_maadi/data/api/api_manager.dart';
+import 'package:news_app_c11_maadi/data/repository_impl/SourcesRepositoryImpl.dart';
 import 'package:news_app_c11_maadi/ui/category_details/ViewModel/CategoryDetailsViewModel.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/NewsListWidget/news_list.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/source_tab.dart';
+
+import '../../data/repository_datasource_impl/SourcesDataSourceApiImpl.dart';
 
 
 class CategoryDetailsTab extends StatefulWidget {
@@ -16,7 +21,9 @@ class CategoryDetailsTab extends StatefulWidget {
 }
 
 class _CategoryDetailsTabState extends State<CategoryDetailsTab> {
-  CategoriesViewModel viewModel = CategoriesViewModel();
+  // ?? DI
+  // field injection
+  CategoriesViewModel viewModel = getIt<CategoriesViewModel>();
   @override
   void initState() {
     // TODO: implement initState
@@ -40,13 +47,16 @@ class _CategoryDetailsTabState extends State<CategoryDetailsTab> {
                   }
                 case CategoriesErrorState():
                   {
-                    return Column(
-                      children: [
-                        Text(state.error),
-                        ElevatedButton(onPressed: (){
-                          viewModel.loadSources(widget.categoryId);
-                        }, child: Text("Try Again"))
-                      ],
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(state.error),
+                          ElevatedButton(onPressed: (){
+                            viewModel.loadSources(widget.categoryId);
+                          }, child: Text("Try Again"))
+                        ],
+                      ),
                     );
                   }
                 case CategoriesSuccessState():

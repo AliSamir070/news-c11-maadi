@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app_c11_maadi/DI/di.dart';
+import 'package:news_app_c11_maadi/data/api/api_manager.dart';
+import 'package:news_app_c11_maadi/data/repository_datasource_impl/NewsDataSourceApiImpl.dart';
+import 'package:news_app_c11_maadi/data/repository_impl/NewsRepositoryImpl.dart';
 import 'package:news_app_c11_maadi/ui/category_details/widgets/NewsListWidget/ViewModel/NewsViewModel.dart';
 
 import '../../../../data/model/SourcesResponse/Source.dart';
@@ -15,7 +19,8 @@ class NewsListWidget extends StatefulWidget {
 }
 
 class _NewsListWidgetState extends State<NewsListWidget> {
-  NewsViewModel newsViewModel = NewsViewModel();
+  // dependency injection
+  NewsViewModel newsViewModel = getIt<NewsViewModel>();
 
   @override
   void initState() {
